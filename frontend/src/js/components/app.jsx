@@ -1,9 +1,9 @@
 import React from "react";
 
 require("sass/app");
-export default () => (
+export default ({children}) => (
   <div id="app">
-    Hello world!
+    {children}
   </div>
 );
 

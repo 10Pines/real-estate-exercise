@@ -1,0 +1,21 @@
+@import "theme";
+
+#app {
+  .sign-up__roles {
+    display: flex;
+  }
+
+  .sign-up__role {
+    margin-right: $spacing-h-s;
+    color: gray;
+
+    &--current {
+      color: $text-color;
+      font-weight: 700;
+    }
+
+    &--done {
+      color: green;
+    }
+  }
+}

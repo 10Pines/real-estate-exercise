@@ -1,0 +1,26 @@
+@import "theme";
+
+#app {
+  .home {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home__title {
+    margin-bottom: $spacing-v;
+  }
+
+  .home__sign-in-up {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .home-sign-up__roles {
+    display: flex;
+    flex-direction: column;
+  }
+}
