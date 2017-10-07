@@ -19,6 +19,14 @@
     width: 100%;
   }
 
+  .sign-in__field {
+    &--error {
+      input {
+        border-color: $error-color;
+      }
+    }
+  }
+
   .home-sign-up__roles {
     display: flex;
     flex-direction: column;

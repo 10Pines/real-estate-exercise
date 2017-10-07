@@ -11,9 +11,24 @@ import createHistory from "history/createBrowserHistory";
 
 import RoutesDefinition from "front/routing/routes";
 
+import Cookies from "h/cookies";
+
 const history = createHistory();
 
-const store = configureStore({}, history);
+let session = Cookies.get("session");
+if (session) {
+  session = JSON.parse(session);
+} else {
+  session = null;
+}
+
+const storeState = {
+  session: {
+    session
+  }
+};
+
+const store = configureStore(storeState, history);
 
 ReactDOM.render(
   <AppContainer>
