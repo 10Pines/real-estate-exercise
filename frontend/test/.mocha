@@ -1,0 +1,6 @@
+frontend/test/js/**/*.spec.jsx
+frontend/test/js/**/*.spec.js
+--compilers js:babel-register
+--require frontend/test/mochaSetup.js
+--recursive
+--reporter spec

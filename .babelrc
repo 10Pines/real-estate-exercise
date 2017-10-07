@@ -1,0 +1,23 @@
+{
+  "compact": false,
+  "presets": [
+    "es2015",
+    "react"
+  ],
+  "plugins": [
+    "transform-object-rest-spread",
+    "babel-plugin-webpack-alias"
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "istanbul"
+      ]
+    },
+    "development": {
+      "plugins": [
+        "react-hot-loader/babel"
+      ]
+    }
+  }
+}

@@ -1,0 +1,5 @@
+server/test/**/*.spec.js
+--compilers js:babel-register
+--require server/test/mochaSetup.js
+--recursive
+--reporter spec
