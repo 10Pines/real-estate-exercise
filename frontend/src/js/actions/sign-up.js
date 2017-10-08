@@ -44,7 +44,8 @@ const finish = () => (dispatch, getState) => {
 
   dispatch(saveStart());
   Services.api.signUp.signUp(data)
-    .then((session) => {
+    .then((res) => {
+      const session = res.session;
       Services.changeToken(session.token);
       Cookies.set("session", JSON.stringify(session));
       dispatch(saveSuccess());

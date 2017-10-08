@@ -25,7 +25,8 @@ const error = () => ({
 const signIn = (user, password) => (dispatch) => {
   dispatch(start());
   Services.api.auth.signIn(user, password)
-    .then((session) => {
+    .then((res) => {
+      const session = res.session;
       Services.changeToken(session.token);
       Cookies.set("session", JSON.stringify(session));
       dispatch(success(session));

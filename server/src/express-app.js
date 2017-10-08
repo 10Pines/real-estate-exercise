@@ -2,6 +2,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+const bearerToken = require('express-bearer-token');
 const morgan = require("morgan");
 const staticGzip = require("express-static-gzip");
 const sslRedirect = require("heroku-ssl-redirect");
@@ -20,6 +21,7 @@ app.engine(".hbs", exphbs({extname: ".hbs"}));
 app.set("view engine", ".hbs");
 app.set("views", buildPath + "/templates/");
 
+app.use(bearerToken());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(compression());
