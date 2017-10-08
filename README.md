@@ -1,26 +1,37 @@
-# Dicen Web App
+# Real State App
+
+##TODO
+- Encrypt password with BCrypt
+- Persist roles
+- Show user and roles information in dashboard
+- Add all fields
+- Finish real validations
+- Server side validations
+- Properly store and format addresses
+- Combo boxes for fields with fixed options
+- Use a UI calendar for dates
+- Tests
+- Styling
+- Expire sessions
+- Update dependencies
+
+w
+## The app
 
 This application has two parts:
-- Webapp: An express app in charge of serving static assets and handling authentication endpoints
+- Webapp: An express app in charge of handling the API endpoints and serving static assets
 - SPA: The React app
 
-# Development
+## Development
 
 1) Install dependencies by running `yarn install --ignore-scripts`
-2) Run `grunt dev` to compile assets
+2) Run `grunt dev` to compile assets in dev mode
 3) Run `yarn run server:watch`
 
 The app should have started at `http://localhost:3006`.
-By default, it will try to use the API at `http://localhost:3007`. This can be changed through the `API_URL` environment variable.
 
-There's an `.env.example` file that contains a few environment variables that need to be set. For example to enable GitHub authentication.
-
-# Production
+## Production
 
 1) Install dependencies by running `yarn`
-2) Run `grunt build` to compile all the assets
-3) Run `yarn run server`
-
-# Deployment
-The app uses Heroku as infrastructure.
-It can be deployed both from the code or from a Docker image built with the `Dockerfile` included.
+2) Run `grunt build` to compile all the assets for production 
+3) Run `NODE_ENV=production yarn run server`

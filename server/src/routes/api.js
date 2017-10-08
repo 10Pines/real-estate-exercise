@@ -1,79 +1,60 @@
 const router = require("express").Router();
-const crypto = require("crypto");
 
-const models = require("../models");
-const User = models.User;
-const Session = models.Session;
+const AuthService = require("../services/auth");
+const UsersService = require("../services/users");
 
-const Data = require("../data");
-
-const delay = 1200;
+const delay = 500;
 
 module.exports = function () {
-  router.post("/sign-in", (req, res) => {
-    setTimeout(() => {
-      User.findOne({where: {email: req.body.email, password: req.body.password}})
-        .then(user => {
-          if (!user) {
-            return res.status(404).send({error: "Not found"});
-          }
-          const token = crypto.randomBytes(64).toString("hex");
-          const sessionAttrs = {userId: user.id, token};
-          return Session.create(sessionAttrs)
-            .then(session => {
-              res.send({session: sessionAttrs});
-            });
-        })
-        .catch((e) => {
-          console.log(e);
-          res.status(500).end();
-        });
-    }, delay);
-  });
-  router.post("/sign-up", (req, res) => {
-    setTimeout(() => {
-      const data = req.body;
+  router.post("/auth/sign-in", async (req, res) => {
+    setTimeout(async () => {
+      let result;
+      try {
+        result = await AuthService.signIn(req.body.email, req.body.password);
+      } catch (e) {
+        console.log(e);
+        return res.status(500).end();
+      }
 
-      const dataCopy = {...data};
-      delete dataCopy.general;
-      const userAttr = {
-        ...data.general,
-        id: Data.users.length + 1,
-        roles: {...dataCopy}
-      };
-      User.create(userAttr)
-        .then(user => {
-          const token = crypto.randomBytes(64).toString("hex");
-          const sessionAttrs = {userId: user.id, token};
-          return Session.create(sessionAttrs)
-            .then(session => {
-              res.send({session: sessionAttrs});
-            });
-        })
-        .catch((e) => {
-          console.log(e);
-          res.status(500).end();
-        });
+      const error = result.error;
+      if (error) {
+        return res.status(error.status).send({error: error.description});
+      }
+      res.send({session: result.session});
     }, delay);
   });
-  router.get("/me", (req, res) => {
-    setTimeout(() => {
+  router.post("/users/sign-up", (req, res) => {
+    setTimeout(async () => {
+      try {
+        const result = await UsersService.signUp(req.body);
+        res.send({session: result.session});
+      } catch (e) {
+        console.error(e);
+        return res.status(500).end();
+      }
+    }, delay);
+  });
+  router.get("/users/me", (req, res) => {
+    setTimeout(async () => {
       const token = req.token;
+      let result, userResult, error;
+      try {
+        result = await AuthService.getSession(token);
+        let error = result.error;
+        if (error) {
+          return res.status(error.status).send({error: error.description});
+        }
+        userResult = await UsersService.getUser(result.session.userId);
+        error = userResult.error;
+        if (error) {
+          return res.status(error.status).send({error: error.description});
+        }
+        res.send(userResult.user);
+      } catch (e) {
+        console.error(e);
+        return res.status(500).end();
+      }
 
-      Session.findOne({where: {token}})
-        .then(session => {
-          if (!session) {
-            return res.status(401).send({error: "Session not valid"});
-          }
-          User.findById(session.userId)
-            .then(user => {
-              if (user) {
-                return res.send(user);
-              } else {
-                return res.status(404).send({error: "User not found"});
-              }
-            });
-        });
     }, delay);
   });
   return router;
