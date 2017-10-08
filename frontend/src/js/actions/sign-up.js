@@ -1,7 +1,17 @@
+import Services from "front/services";
+
+import Cookies from "h/cookies";
+import signInActions from "front/actions/sign-in";
+
 export const names = {
   START: "SIGN_UP__START",
   BACK: "SIGN_UP__BACK",
-  NEXT: "SIGN_UP__NEXT"
+  NEXT: "SIGN_UP__NEXT",
+  PROPERTY_CHANGED: "SIGN_UP__PROPERTY_CHANGED",
+  SET_ERRORS: "SIGN_UP__SET_ERRORS",
+  SAVE_START: "SIGN_UP__SAVE_START",
+  SAVE_SUCCESS: "SIGN_UP__SAVE_SUCCESS",
+  SAVE_ERROR: "SIGN_UP__SAVE_ERROR"
 };
 
 const start = (roles) => ({
@@ -17,13 +27,54 @@ const next = () => ({
   type: names.NEXT
 });
 
-const finish = () => (dispatch) => {
-  console.log("This should call the sign up service");
+const saveStart = () => ({
+  type: names.SAVE_START
+});
+
+const saveSuccess = () => ({
+  type: names.SAVE_SUCCESS
+});
+
+const saveError = () => ({
+  type: names.SAVE_ERROR
+});
+
+const finish = () => (dispatch, getState) => {
+  const data = getState().signUp.data;
+
+  dispatch(saveStart());
+  Services.api.signUp.signUp(data)
+    .then((session) => {
+      console.log("LALA", session);
+      Cookies.set("session", JSON.stringify(session));
+      console.log("LALA")
+      dispatch(saveSuccess());
+      console.log("BEFORE");
+      const action = signInActions.success(session);
+      console.log(action)
+      dispatch(action);
+    })
+    .catch(() => dispatch(saveError()));
 };
+
+const propertyChanged = (role, property, value) => ({
+  type: names.PROPERTY_CHANGED,
+  role,
+  property,
+  value
+});
+
+const setErrors = (role, errors) => ({
+  type: names.SET_ERRORS,
+  role,
+  errors
+});
 
 export default {
   start,
   back,
   next,
-  finish
+  finish,
+  propertyChanged,
+  setErrors
 };

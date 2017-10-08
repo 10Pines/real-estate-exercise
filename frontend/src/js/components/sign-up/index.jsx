@@ -5,6 +5,7 @@ import {bindActionCreators} from "redux";
 import signUpActions from "front/actions/sign-up";
 
 import rolesData from "h/roles";
+import SignUpValidation from "h/sign-up-validation";
 
 import {Button} from "semantic-ui-react";
 
@@ -36,16 +37,27 @@ class SignUp extends Component {
     this.props.actions.back();
   }
 
+  doValidationsAndRun(callback) {
+    const {currentRole, data} = this.props.signUp;
+    const errors = new SignUpValidation().validate(currentRole, data[currentRole]);
+    if (Object.keys(errors).length === 0) {
+      this.props.actions.setErrors(currentRole, null);
+      callback();
+    } else {
+      this.props.actions.setErrors(currentRole, errors);
+    }
+  }
+
   goNext() {
-    this.props.actions.next();
+    this.doValidationsAndRun(this.props.actions.next);
   }
 
   finish() {
-    this.props.actions.finish();
+    this.doValidationsAndRun(this.props.actions.finish);
   }
 
   render() {
-    const {roles, currentRole} = this.props.signUp;
+    const {roles, currentRole, data, saving} = this.props.signUp;
 
     const currentRoleObj = rolesData.all[currentRole];
 
@@ -73,11 +85,11 @@ class SignUp extends Component {
       <div className="sign-up__roles">
         {rolesLabels}
       </div>
-      <CurrentRoleEl/>
+      <CurrentRoleEl data={data[currentRole]} onPropertyChanged={this.props.actions.propertyChanged}/>
       <div className="sign-up__actions">
         {isFirstStep ? null : (<Button className="sign-up__back" color="red" onClick={this.goBack}>Back</Button>)}
         {isLastStep ? null : (<Button className="sign-up__next" color="green" onClick={this.goNext}>Next</Button>)}
-        {isLastStep ? (<Button className="sign-up__finish" color="green" onClick={this.finish}>Finish</Button>) : null}
+        {isLastStep ? (<Button className="sign-up__finish" color="green" loading={saving} onClick={this.finish}>Finish</Button>) : null}
       </div>
     </div>);
   }

@@ -39,5 +39,6 @@ const signOut = () => {
 
 export default {
   signIn,
-  signOut
+  signOut,
+  success
 };
