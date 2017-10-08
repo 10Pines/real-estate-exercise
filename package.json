@@ -28,10 +28,6 @@
     "cookie-parser": "^1.4.3",
     "css-loader": "^0.28.7",
     "enzyme": "^2.9.1",
-    "eslint": "^4.6.0",
-    "eslint-plugin-mocha": "^4.11.0",
-    "eslint-plugin-no-unused-vars-rest": "^1.0.4",
-    "eslint-plugin-react": "^7.3.0",
     "express": "^4.15.4",
     "express-handlebars": "^3.0.0",
     "express-static-gzip": "^0.3.0",
@@ -60,7 +56,6 @@
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.1.1",
     "null-loader": "^0.1.1",
-    "nyc": "^11.1.0",
     "postcss-loader": "^2.0.5",
     "react": "^15.5.4",
     "react-addons-test-utils": "^15.4.2",
@@ -74,7 +69,6 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "sass-lint": "^1.11.1",
     "sass-loader": "^6.0.5",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.72.0",
@@ -92,39 +86,10 @@
   "scripts": {
     "build": "NODE_ENV=production grunt build",
     "dev": "grunt dev",
-    "coverage": "nyc npm run test",
     "heroku-postbuild": "NODE_ENV=production grunt build",
-    "lint": "npm-run-all --parallel lint:back lint:front lint:sass",
-    "lint:back": "eslint --ext js --ext jsx server/src server/test",
-    "lint:front": "eslint --ext js --ext jsx frontend/src/js frontend/test/js",
-    "lint:sass": "sass-lint frontend/src/sass/**/*.scss -v",
     "server": "node server/src/start.js",
     "server:watch": "nodemon --watch server server/src/start.js",
     "start": "node server/src/start.js",
     "test": "NODE_ENV=test mocha --opts frontend/test/.mocha"
-  },
-  "nyc": {
-    "include": [
-      "frontend/src/js/**"
-    ],
-    "exclude": [
-      "test/**"
-    ],
-    "require": [
-      "babel-register"
-    ],
-    "extension": [
-      ".js",
-      ".jsx"
-    ],
-    "reporter": [
-      "lcov",
-      "text-summary"
-    ],
-    "sourceMap": false,
-    "instrument": false,
-    "all": false,
-    "cache": false,
-    "report-dir": "./reports/istanbul"
   }
 }
