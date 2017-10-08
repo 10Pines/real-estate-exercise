@@ -5,19 +5,31 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+    padding: $spacing-v $spacing-h;
   }
 
   .home__title {
-    margin-bottom: $spacing-v;
+    margin-bottom: $spacing-v-l;
+    text-align: center;
   }
 
   .home__sign-in-up {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-    max-width: 500px;
+    padding-bottom: -$spacing-v-l;
+    padding-right: -$spacing-h-l;
     width: 100%;
   }
+
+  .home__sign-in,
+  .home__sign-up{
+    flex: 1;
+    margin-bottom: $spacing-v-l;
+    margin-right: $spacing-h-l;
+    min-width: 250px;
+  }
+
 
   .sign-in__field {
     &--error {
