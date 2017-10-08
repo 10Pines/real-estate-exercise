@@ -12,6 +12,9 @@ import createHistory from "history/createBrowserHistory";
 import RoutesDefinition from "front/routing/routes";
 
 import Cookies from "h/cookies";
+import Services from "front/services";
+
+const config = JSON.parse(document.getElementById("config").innerHTML);
 
 const history = createHistory();
 
@@ -21,6 +24,7 @@ if (session) {
 } else {
   session = null;
 }
+Services.setup(config.apiEndpoint, session ? session.token : null);
 
 const storeState = {
   session: {

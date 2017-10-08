@@ -45,13 +45,10 @@ const finish = () => (dispatch, getState) => {
   dispatch(saveStart());
   Services.api.signUp.signUp(data)
     .then((session) => {
-      console.log("LALA", session);
+      Services.changeToken(session.token);
       Cookies.set("session", JSON.stringify(session));
-      console.log("LALA")
       dispatch(saveSuccess());
-      console.log("BEFORE");
       const action = signInActions.success(session);
-      console.log(action)
       dispatch(action);
     })
     .catch(() => dispatch(saveError()));

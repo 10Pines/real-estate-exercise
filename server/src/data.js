@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   users: [
     {
       id: 1,
@@ -9,5 +9,6 @@ export default {
       cellPhone: "12345",
       address: "Avenida siempre viva"
     }
-  ]
+  ],
+  sessions: []
 };

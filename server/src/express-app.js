@@ -21,7 +21,7 @@ app.set("view engine", ".hbs");
 app.set("views", buildPath + "/templates/");
 
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 app.use(compression());
 
 if (process.env.NODE_ENV !== "test") {
@@ -53,7 +53,7 @@ app.use("/static", staticGzip(buildPath + "/static/", {maxAge: 30 * 24 * 60 * 60
 
 const config = {
   cssLink: process.env.NODE_ENV === "production",
-  apiEndpoint: process.env.API_URL || "http://localhost:3007"
+  apiEndpoint: process.env.API_URL || "/api/"
 };
 
 Routes.setup(app, config);

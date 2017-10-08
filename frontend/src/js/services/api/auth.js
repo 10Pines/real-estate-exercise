@@ -1,17 +1,8 @@
-import Data from "./data";
-window.Data = Data;
+import ApiService from "./api-service";
 
-export default class AuthApiService {
+export default class AuthApiService extends ApiService {
   signIn(email, password) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const user = Data.users.find(u => u.email === email && u.password === password);
-        if (user) {
-          resolve({session: "ABCDE", userId: user.id});
-        } else {
-          reject({error: "Invalid"});
-        }
-      }, 1000);
-    });
+    const body = {email, password};
+    return this.request("sign-in", {method: "POST", body});
   }
 }

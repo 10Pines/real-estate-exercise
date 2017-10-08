@@ -1,20 +1,7 @@
-import Data from "./data";
+import ApiService from "./api-service";
 
-export default class SignUpApiService {
+export default class SignUpApiService extends ApiService {
   signUp(data) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const dataCopy = {...data};
-        delete dataCopy.general;
-        const user = {
-          ...data.general,
-          id: Data.users.length + 1,
-          roles: {...dataCopy}
-        };
-        Data.users.push(user);
-
-        resolve({session: "ABCDE", userId: user.id});
-      }, 1000);
-    });
+    return this.request("sign-up", {method: "POST", body: data});
   }
 }
