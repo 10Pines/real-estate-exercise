@@ -7,7 +7,7 @@ const EMPTY_DATA = {
     email: "",
     password: "",
     passwordConfirmation: "",
-    cellPhone: "",
+    cellphone: "",
     address: ""
   },
   buyer: {

@@ -1,0 +1,18 @@
+{
+  "development": {
+    "username": "",
+    "password": "",
+    "database": "real-state_development",
+    "dialect": "sqlite",
+    "storage": "./db/real-state-development",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "",
+    "password": "",
+    "database": "real-state_prod",
+    "dialect": "sqlite",
+    "storage": "./db/real-state-prod",
+    "operatorsAliases": false
+  }
+}

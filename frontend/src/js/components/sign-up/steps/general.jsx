@@ -15,8 +15,8 @@ export default ({data, onPropertyChanged}) => (
                   onChange={(event, el) => onPropertyChanged("general", "password", el.value)}/>
       <Form.Input placeholder="Repeat password" type="password" value={data.passwordConfirmation}
                   onChange={(event, el) => onPropertyChanged("general", "passwordConfirmation", el.value)}/>
-      <Form.Input placeholder="Cellphone" value={data.cellPhone}
-                  onChange={(event, el) => onPropertyChanged("general", "cellPhone", el.value)}/>
+      <Form.Input placeholder="Cellphone" value={data.cellphone}
+                  onChange={(event, el) => onPropertyChanged("general", "cellphone", el.value)}/>
       <Form.Input placeholder="Address" value={data.address}
                   onChange={(event, el) => onPropertyChanged("general", "address", el.value)}/>
     </Form>
