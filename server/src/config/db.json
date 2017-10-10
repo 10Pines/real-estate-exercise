@@ -4,7 +4,7 @@
     "password": "",
     "database": "real-state_development",
     "dialect": "sqlite",
-    "storage": "./db/real-state-development",
+    "storage": "./db/real-state-development.sqlite3",
     "operatorsAliases": false
   },
   "production": {
@@ -12,7 +12,7 @@
     "password": "",
     "database": "real-state_prod",
     "dialect": "sqlite",
-    "storage": "./db/real-state-prod",
+    "storage": "./db/real-state-prod.sqlite3",
     "operatorsAliases": false
   }
 }
