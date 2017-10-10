@@ -28,7 +28,7 @@ export default function dashboard(state, action) {
       return {
         ...state,
         loadingUser: false,
-        loadingUserError: true
+        loadingUserError: action.error
       };
     }
     default:
