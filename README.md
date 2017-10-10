@@ -15,7 +15,6 @@
 - Expire sessions
 - Update dependencies
 
-w
 ## The app
 
 This application has two parts:
