@@ -1,5 +1,6 @@
 const crypto = require("crypto");
 const models = require("../models");
+const { Op } = require('sequelize');
 const User = models.User;
 const Session = models.Session;
 
@@ -20,7 +21,15 @@ class AuthService {
   }
 
   async getSession(token) {
-    const session = await Session.findOne({where: {token}});
+    const session = await Session.findOne({
+      where: {
+        token,
+        createdAt: {
+          // Tokens are valid for a day
+          [Op.gt]: new Date(new Date() - 24 * 60 * 60 * 1000)
+        }
+      }
+    });
     if (!session) {
       return {error: {status: 401, description: "Token not valid"}};
     }
