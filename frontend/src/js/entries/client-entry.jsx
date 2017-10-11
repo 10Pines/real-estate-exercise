@@ -1,6 +1,7 @@
 require("isomorphic-fetch");
 import "react-hot-loader/patch";
 import React from "react";
+import 'rc-datepicker/lib/style.css'
 
 import ReactDOM from "react-dom";
 import {AppContainer} from "react-hot-loader";

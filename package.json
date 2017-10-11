@@ -58,6 +58,7 @@
     "npm-run-all": "^4.1.1",
     "null-loader": "^0.1.1",
     "postcss-loader": "^2.0.5",
+    "rc-datepicker": "^5.0.9",
     "react": "^15.5.4",
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.5.4",
