@@ -10,7 +10,7 @@ export default ({data, onPropertyChanged}) => (
       <Form.Input placeholder="Maximum Purchase Price" value={data.maximumPurchasePrice} onChange={(event, el) => onPropertyChanged("buyer", "maximumPurchasePrice", el.value)}/>
       <Form.Input placeholder="Earnest Money Deposit" value={data.earnestMoneyDeposit} onChange={(event, el) => onPropertyChanged("buyer", "earnestMoneyDeposit", el.value)}/>
       <Form.Input placeholder="Closing Days" value={data.closingDays} onChange={(event, el) => onPropertyChanged("buyer", "closingDays", el.value)}/>
-      <Dropdown placeholder="Approved" value={data.approved} fluid selection options={[{text: "Yes", value: "Yes"}, {text: "No", value: "No"}]} onChange={(event, el) => onPropertyChanged("buyer", "approved", el.value)}/>
+      <Dropdown placeholder="Approved" value={data.approved} fluid selection options={[{text: "Yes", value: true}, {text: "No", value: false}]} onChange={(event, el) => onPropertyChanged("buyer", "approved", el.value)}/>
     </Form>
   </div>
 );
