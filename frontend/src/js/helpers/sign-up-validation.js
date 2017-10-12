@@ -175,8 +175,7 @@ function validCellphoneNumber(cellphoneNumber){
 }
 
 function validAddress(address){
-  var re = /^\d+\s[A-z\s]{1,}/;
-  return re.test(address);
+  return address.length !== 0;
 }
 
 function validNumber(number){
