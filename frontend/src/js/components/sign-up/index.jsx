@@ -57,8 +57,7 @@ class SignUp extends Component {
   }
 
   render() {
-    const {roles, currentRole, data, saving} = this.props.signUp;
-
+    const {roles, currentRole, data, saving, errors} = this.props.signUp;
     const currentRoleObj = rolesData.all[currentRole];
 
     const rolesLabels = roles.map(r => {
@@ -85,7 +84,7 @@ class SignUp extends Component {
       <div className="sign-up__roles">
         {rolesLabels}
       </div>
-      <CurrentRoleEl data={data[currentRole]} onPropertyChanged={this.props.actions.propertyChanged}/>
+      <CurrentRoleEl data={data[currentRole]} errors={errors[currentRole] || {}} onPropertyChanged={this.props.actions.propertyChanged}/>
       <div className="sign-up__actions">
         {isFirstStep ? null : (<Button className="sign-up__back" color="red" onClick={this.goBack}>Back</Button>)}
         {isLastStep ? null : (<Button className="sign-up__next" color="green" onClick={this.goNext}>Next</Button>)}
